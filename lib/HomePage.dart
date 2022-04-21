@@ -1,10 +1,10 @@
-import 'dart:ui';
-
 import 'package:contactly/helpers/Constants.dart';
 import 'package:flutter/material.dart';
+import 'DetailsPage.dart';
 import 'models/Record.dart';
 import 'models/RecordList.dart';
 import 'models/RecordService.dart';
+import 'DetailsPage.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -129,7 +129,9 @@ class _HomePageState extends State<HomePage> {
                         RichText(
                           text: TextSpan(
                             text: record.address,
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                                color: Colors.white
+                            ),
 
                           ),
                           maxLines: 3,
@@ -140,7 +142,14 @@ class _HomePageState extends State<HomePage> {
           ),
           trailing:
           Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => new DetailPage(record: record,)
+                )
+            );
+          },
         ),
       ),
     );
@@ -203,7 +212,28 @@ class _HomePageState extends State<HomePage> {
           onPressed: () {
             _searchPressed();
           },
-        )
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.favorite),
+            onPressed: (){ },
+          ),
+          PopupMenuButton<Text>(
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  child: Text("First"),
+                ),
+                PopupMenuItem(
+                  child: Text("Second"),
+                ),
+                PopupMenuItem(
+                  child: Text("Third"),
+                ),
+              ];
+            }
+          ),
+        ],
 
     );
   }
